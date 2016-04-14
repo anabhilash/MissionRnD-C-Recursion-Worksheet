@@ -23,8 +23,32 @@
 */
 #include "stdafx.h"
 
-
-int get_steps(int s)
+void countN(int sum, int temp, int *count)
 {
-	return 0;
+	if (temp == sum && sum != 0)
+		(*count) = (*count) + 1;
+	else
+	{
+		if (sum - temp > 2)
+		{
+			countN(sum, temp + 1, count);
+			countN(sum, temp + 2, count);
+		}
+		else if (!(sum - temp ^ 1))
+		{
+			(*count) = (*count) + 1;
+		}
+		else if (!(sum - temp ^ 2))
+		{
+			(*count) = (*count) + 2;
+		}
+
+	}
+}
+int  get_steps(int s)
+{
+	
+	int count = 0;
+	countN(s, 0, &count);
+	return count;
 }
